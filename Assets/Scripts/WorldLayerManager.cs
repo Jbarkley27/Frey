@@ -1,13 +1,12 @@
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
-using Quaternion = UnityEngine.Quaternion;
+
 
 public class WorldLayerManager : MonoBehaviour
 {
-    public GameObject lineEndObject;
-    public LayerMask touchLayer;
-    public GameObject playerMoveStopNode;
-    public MovementSystem movementSystem;
+    [SerializeField] private GameObject _lineEndObject;
+    [SerializeField] private LayerMask _touchLayer;
+    [SerializeField] public MovementSystem _movementSystem;
     public static WorldLayerManager instance;
 
     private void Awake()
@@ -22,10 +21,6 @@ public class WorldLayerManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -44,33 +39,35 @@ public class WorldLayerManager : MonoBehaviour
         // raycast to get the position of the line end
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, touchLayer))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, _touchLayer))
         {
-            lineEndObject.transform.position = hit.point;
+            _lineEndObject.transform.position = hit.point;
         }
     }
 
 
     public Vector3 GetDirectionFromWorldCursor(Vector3 source)
     {
-        if (lineEndObject == null)
+        if (_lineEndObject == null)
         {
             Debug.LogError("LineEndObject is null");
             return Vector3.zero;
         }
 
-        return lineEndObject.transform.position - source;
+        return _lineEndObject.transform.position - source;
     }
 
 
     public void ActivateCursor()
     {
+        if (!TurnBasedBattleManager.instance.IsTimeStopped()) return;
+        
         // listen for mouse click
         if (Input.GetMouseButtonUp(0))
         {
             Debug.Log("Mouse Clicked");
-            Instantiate(playerMoveStopNode, lineEndObject.transform.position, Quaternion.identity);
-            movementSystem.Move(lineEndObject.transform.position);
+            TurnBasedBattleManager.instance.ResumeTime();
+            _movementSystem.Move(_lineEndObject.transform.position);
         }
     }
 }
