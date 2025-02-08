@@ -11,6 +11,6 @@ public class UILookAtCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.LookAt(Camera.main.transform);
+        transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.forward, Camera.main.transform.rotation * Vector3.up);
     }
 }

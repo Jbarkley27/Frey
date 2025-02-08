@@ -15,6 +15,8 @@ public class EnemyMovementModule : MonoBehaviour
     Coroutine _pathCoroutine;
     [SerializeField] private GameObject _spherePrefab;
     public bool _pathing = false;
+    public Rigidbody rb;
+    public float _rotateSpeed = 5.0f;
 
 
     [Header("NavMesh Agent Settings")]
@@ -53,6 +55,8 @@ public class EnemyMovementModule : MonoBehaviour
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 
         _navMeshAgent.stoppingDistance = _currentStoppingDistance;
+
+        RotateTowards(GlobalDataStore.instance.player.transform.position - transform.position);
     }
 
 
@@ -198,7 +202,7 @@ public class EnemyMovementModule : MonoBehaviour
         float distanceCovered = 0f;
         int segmentIndex = 0;
 
-        Debug.Log("Got here 1");
+
 
 
         for (int i = 0; i < sphereCount; i++)
@@ -223,7 +227,7 @@ public class EnemyMovementModule : MonoBehaviour
             _newPoints.Add(spawnPosition);
         }
 
-        Debug.Log("Got here");
+
 
         // If we only have a few points, just use the original points, no need to shorten the path
         if (_newPoints.Count < _minPoints)
@@ -235,7 +239,7 @@ public class EnemyMovementModule : MonoBehaviour
         }
 
 
-        Debug.Log("Path shortened, new path has " + _newPoints.Count + " points");
+
 
         // Limit the path by removing a percentage of teh newPoints array
         // calculate the percentage of the path
@@ -244,33 +248,42 @@ public class EnemyMovementModule : MonoBehaviour
         finalPathPercentage = Mathf.Clamp(finalPathPercentage, 0, _newPoints.Count);
 
 
-        for (int i = 0; i < finalPathPercentage; i++)
-        {
-            // GameObject node = Instantiate(_spherePrefab, newPoints[i], Quaternion.identity);
-            _tempPoints.Add(_newPoints[i]);
-        }
+        for (int i = 0; i < finalPathPercentage; i++) _tempPoints.Add(_newPoints[i]);
         
-        // pathFullyCalculated = _navMeshAgent.hasPath;
-
-        // _navMeshAgent.SetDestination(_tempPoints.Last().transform.position);
 
 
         _navMeshAgent.ResetPath();
         StartCoroutine(CalculatePathHelper(_tempPoints.Last(), true));
-
-
-        // _finalLineRenderer.SetPosition(0, _enemyVisual.position);
-        // _finalLineRenderer.SetPositions(_navMeshAgent.path.corners);
-        
-
-        // _lineRenderer.enabled = true;
-
     }
 
 
 
 
+    public void RotateTowards(Vector3 targetDirection)
+    {
+        // if (TurnBasedBattleManager.instance.IsTimeStopped()) return;
 
+        // Calculate the target rotation
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+
+        targetRotation = targetRotation.normalized;
+
+        // only rotate around the y axis
+        targetRotation.x = 0;
+        targetRotation.z = 0;
+
+        // Smoothly interpolate between current and target rotation
+        Quaternion smoothedRotation = Quaternion.Slerp(
+            rb.rotation,             // Current rotation
+            targetRotation,          // Target rotation
+            _rotateSpeed * Time.deltaTime // Interpolation factor
+        );
+
+        smoothedRotation = smoothedRotation.normalized;
+
+        // Apply the smooth rotation to the Rigidbody
+        rb.MoveRotation(smoothedRotation);
+    }
 
 
 
@@ -280,7 +293,7 @@ public class EnemyMovementModule : MonoBehaviour
 
     public bool IsWithinRange()
     {
-        return Vector3.Distance(transform.position, _target.position) < _navMeshAgent.stoppingDistance;
+        return Vector3.Distance(transform.position, _target.position) < _finalStoppingDistance;
     }
 
     public void RandomizeAgentValues()

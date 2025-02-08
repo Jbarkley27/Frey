@@ -16,6 +16,16 @@ public class EnemyIntentionModule : MonoBehaviour
     public enum Intention { MOVE, SHOOT };
     public Intention nextIntention;
 
+    public GameObject projectilePrefab;
+    public int projectileCount;
+    public float spreadAngle;
+    public int range;
+    public float force;
+    public int damage;
+    public bool isPlayerProjectile;
+    public Transform source;
+    public Transform target;
+
 
 
     private void Start()
@@ -43,6 +53,19 @@ public class EnemyIntentionModule : MonoBehaviour
         } else if (nextIntention == Intention.SHOOT)
         {
             Debug.Log("Shooting");
+            ArcProjectileSystem.instance.SpawnProjectiles(
+                new ArcProjectileSystem.ProjectileData(
+                    projectilePrefab,
+                    projectileCount,
+                    spreadAngle,
+                    force,
+                    range,
+                    damage,
+                    isPlayerProjectile,
+                    source,
+                    target
+                )
+            );
         }
         
 

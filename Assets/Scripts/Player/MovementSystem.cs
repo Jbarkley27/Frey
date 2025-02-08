@@ -25,7 +25,7 @@ public class MovementSystem : MonoBehaviour
         // ensure player y position is always 0
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         
-        RotateTowards(WorldLayerManager.instance.GetDirectionFromWorldCursor(transform.position));
+        RotateTowards(WorldCursorManager.instance.GetDirectionFromWorldCursor(transform.position));
     }
 
 
