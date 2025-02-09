@@ -1,5 +1,7 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
+using Image = UnityEngine.UI.Image;
 
 
 public class WorldCursorManager : MonoBehaviour
@@ -7,10 +9,13 @@ public class WorldCursorManager : MonoBehaviour
     [SerializeField] private GameObject _lineEndObject;
     [SerializeField] private LayerMask _touchLayer;
     [SerializeField] public MovementSystem _movementSystem;
+    [SerializeField] public LineRenderer _lineRenderer;
     public static WorldCursorManager instance;
     public Chip activeChip;
     public enum CursorState { No_Chip_Loaded, Chip_Loaded };
     public CursorState cursorState = CursorState.No_Chip_Loaded;
+    public GameObject cursorAimRoot;
+    public Image cursorAimImage;
 
     private void Awake()
     {
@@ -29,6 +34,18 @@ public class WorldCursorManager : MonoBehaviour
     {
         TrackWorldCursor();
         ActivateCursor();
+        DrawLine();
+
+        if (activeChip == null)
+        {
+            _lineRenderer.enabled = false;
+            cursorAimRoot.SetActive(false);
+        }
+        else
+        {
+            _lineRenderer.enabled = true;
+            cursorAimRoot.SetActive(true);
+        }
     }
 
 
@@ -66,6 +83,58 @@ public class WorldCursorManager : MonoBehaviour
         return _lineEndObject.transform;
     }
 
+    public float distanceExtra;
+    public Vector3 finalWorldCursorPosition;
+    public void DrawLine()
+    {
+        if (_lineRenderer == null)
+        {
+            Debug.LogError("LineRenderer is null");
+            return;
+        }
+
+
+        if (activeChip == null)
+        {
+            _lineRenderer.enabled = false;
+            return;
+        }
+
+        // get the position of the line end
+        Vector3 lineStart = GlobalDataStore.instance.player.transform.position;
+        finalWorldCursorPosition = GetWorldCursor().position;
+
+        // clamp the distance
+        if (Vector3.Distance(lineStart, finalWorldCursorPosition) > activeChip.cursorRange)
+        {
+            Vector3 direction = finalWorldCursorPosition - lineStart;
+            direction.Normalize();
+            finalWorldCursorPosition = lineStart + direction * (activeChip.cursorRange);
+        }
+
+        // make the cursor aim image follow the cursor up to the active chip's range
+        // we need the aim image to to be a certain distance further than the line end
+        Vector3 aimImagePosition = finalWorldCursorPosition + (finalWorldCursorPosition - lineStart).normalized * distanceExtra;
+        cursorAimRoot.transform.position = aimImagePosition;
+        cursorAimImage.transform.localScale = new Vector3(activeChip.chipAimSize, activeChip.chipAimSize, 1);
+
+        
+
+        SetLineRendererSettings(lineStart, finalWorldCursorPosition, 2);
+    }
+
+
+    public void SetLineRendererSettings(Vector3 start, Vector3 end, int count)
+    {
+        if (_lineRenderer == null) return;
+
+         // set the line renderer
+        _lineRenderer.enabled = true;
+        _lineRenderer.positionCount = count;
+        _lineRenderer.SetPosition(0, start);
+        _lineRenderer.SetPosition(1, end);
+    }
+
 
     public void ActivateCursor()
     {
@@ -93,9 +162,10 @@ public class WorldCursorManager : MonoBehaviour
 
                 Debug.Log("Mouse Clicked");
                 TurnBasedBattleManager.instance.ResumeTime();
-                activeChip.ActivateChip();
+                activeChip.ActivateChip(finalWorldCursorPosition);
                 activeChip = null; // Could become an issue
                 PlayerChipManager.instance.ClearAllChipStates();
+                cursorState = CursorState.No_Chip_Loaded;
             }
         }
     }
@@ -110,6 +180,8 @@ public class WorldCursorManager : MonoBehaviour
 
         activeChip = chip;
         cursorState = CursorState.Chip_Loaded;
+        cursorAimImage.sprite = chip.chipAimSprite;
+
     }
 
 

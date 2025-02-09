@@ -11,7 +11,7 @@ public class BasicShootChip : Chip
     public bool isPlayerProjectile;
 
 
-    public override void ActivateChip()
+    public override void ActivateChip(Vector3 position)
     {
         Debug.Log("Basic Shoot Chip Activated");
         ArcProjectileSystem.instance.SpawnProjectiles(

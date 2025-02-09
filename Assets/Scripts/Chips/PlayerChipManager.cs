@@ -27,11 +27,4 @@ public class PlayerChipManager : MonoBehaviour
                 chip.SetSelectionState(Chip.SelectionState.None);
         }
     }
-
-    // public void ChipSelected(Chip chip)
-    // {
-    //     // ClearAllChipStates();
-    //     chip.SetSelectionState(Chip.SelectionState.Selected);
-    //     WorldCursorManager.instance.SetActiveChip(chip);
-    // }
 }

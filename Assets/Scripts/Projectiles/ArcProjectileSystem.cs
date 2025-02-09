@@ -5,7 +5,7 @@ public class ArcProjectileSystem : MonoBehaviour
     public GameObject projectilePrefab; // Prefab to instantiate
     public int projectileCount = 10; // Number of projectiles to spawn
     public float spreadAngle = 360f; // Total angle of the spread (360 for a full circle)
-    public int range = 10; // Range of the projectile
+    public float range = 10; // Range of the projectile
     public float force = 10f; // Force to apply to the projectile
     public static ArcProjectileSystem instance;
     public float projectileMaxRange = 100f;
@@ -16,14 +16,14 @@ public class ArcProjectileSystem : MonoBehaviour
         public GameObject projectilePrefab;
         public int projectileCount;
         public float spreadAngle;
-        public int range;
+        public float range;
         public float force;
         public int damage;
         public bool isPlayerProjectile;
         public Transform source;
         public Transform target;
 
-        public ProjectileData(GameObject projectilePrefab, int projectileCount, float spreadAngle, float force, int range, int damage, bool isPlayerProjectile, Transform source, Transform target)
+        public ProjectileData(GameObject projectilePrefab, int projectileCount, float spreadAngle, float force, float range, int damage, bool isPlayerProjectile, Transform source, Transform target)
         {
             this.projectilePrefab = projectilePrefab;
             this.projectileCount = projectileCount;

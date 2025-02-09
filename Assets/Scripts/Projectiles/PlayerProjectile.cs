@@ -18,8 +18,6 @@ public class PlayerProjectile : MonoBehaviour
         this.direction = direction;
         this.force = force;
 
-        // gameObject.transform.rotation = GlobalDataStore.instance.player.transform.rotation;
-
         gameObject.GetComponent<Rigidbody>().linearVelocity = gameObject.transform.forward * force;
 
         isSetup = true;
@@ -41,10 +39,9 @@ public class PlayerProjectile : MonoBehaviour
 
     public void ShouldDestroyItself()
     {
-
-        if (Mathf.Abs(transform.position.x) > ArcProjectileSystem.instance.projectileMaxRange 
+        if (Mathf.Abs(transform.position.x) > ArcProjectileSystem.instance.range 
             || 
-            Mathf.Abs(transform.position.z) > ArcProjectileSystem.instance.projectileMaxRange)
+            Mathf.Abs(transform.position.z) > ArcProjectileSystem.instance.range)
         {
             Destroy(gameObject);
         }

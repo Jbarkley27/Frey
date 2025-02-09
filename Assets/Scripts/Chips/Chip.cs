@@ -1,11 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Chip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public string chipName;
     public string chipDescription;
+    public float cursorRange;
+    public float chipAimSize;
+    public Sprite chipAimSprite;
     public CanvasGroup selectedBorderCG;
     public enum SelectionState { None, Selected, Hovered };
 
@@ -13,7 +17,7 @@ public class Chip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         SetSelectionState(SelectionState.None);
     }
 
-    public virtual void ActivateChip() {
+    public virtual void ActivateChip(Vector3 position) {
         Debug.Log("Activating Chip");
     }
 
@@ -23,7 +27,6 @@ public class Chip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
 
         SetSelectionState(SelectionState.Hovered);
-        Debug.Log("Pointer Enter");
     }
 
     public void OnPointerExit(PointerEventData eventData) {
@@ -32,7 +35,6 @@ public class Chip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
 
         SetSelectionState(SelectionState.None);
-        Debug.Log("Pointer Exit");
     }
 
     public void OnPointerClick(PointerEventData eventData) {
