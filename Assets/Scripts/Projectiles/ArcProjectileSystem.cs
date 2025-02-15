@@ -74,7 +74,7 @@ public class ArcProjectileSystem : MonoBehaviour
 
             // Use the rigidbody to apply force to the projectile to go straight
             PlayerProjectile newProjectile = projectile.GetComponent<PlayerProjectile>();
-            newProjectile.SetupProjectile(data.target.position - data.source.position, data.force, data.damage, data.range);
+            newProjectile.SetupProjectile(data.target.position - data.source.position, data.force, data.damage, data.range, data.isPlayerProjectile);
         }
     }
 }

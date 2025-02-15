@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 
 public class EnemyMovementModule : MonoBehaviour
 {
@@ -11,9 +12,7 @@ public class EnemyMovementModule : MonoBehaviour
     [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private LineRenderer _finalLineRenderer;
     [SerializeField] private Transform _enemyVisual;
-    [SerializeField] private float _pathUpdateRate = 2.0f;
     Coroutine _pathCoroutine;
-    [SerializeField] private GameObject _spherePrefab;
     public bool _pathing = false;
     public Rigidbody rb;
     public float _rotateSpeed = 5.0f;
@@ -24,8 +23,8 @@ public class EnemyMovementModule : MonoBehaviour
     [SerializeField] private float _speedMax = 2.0f;
     [SerializeField] private float _accelerationMin = 1.0f;
     [SerializeField] private float _accelerationMax = 2.0f;
-    [SerializeField] private float _angularSpeedMin = 120.0f;
-    [SerializeField] private float _angularSpeedMax = 240.0f;
+    // [SerializeField] private float _angularSpeedMin = 120.0f;
+    // [SerializeField] private float _angularSpeedMax = 240.0f;
     [SerializeField] private float _stoppingDistanceMin = 1.0f;
     [SerializeField] private float _stoppingDistanceMax = 2.0f;
     [SerializeField] private float _currentStoppingDistance = 0.5f;
@@ -43,6 +42,7 @@ public class EnemyMovementModule : MonoBehaviour
 
     private void Start()
     {
+        _navMeshAgent.autoRepath = false;
         RandomizeAgentValues();
         _target = PlayerScentNodes.instance.GetRandomScentNode();
     }
@@ -55,6 +55,9 @@ public class EnemyMovementModule : MonoBehaviour
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 
         _navMeshAgent.stoppingDistance = _currentStoppingDistance;
+
+        _navMeshAgent.velocity = Vector3.zero;
+        _navMeshAgent.isStopped = true;
 
         RotateTowards(GlobalDataStore.instance.player.transform.position - transform.position);
     }
@@ -125,16 +128,17 @@ public class EnemyMovementModule : MonoBehaviour
 
     public void ResumeMovement()
     {
-        _navMeshAgent.isStopped = false;
-        _currentStoppingDistance = 0;
+        // _navMeshAgent.autoRepath = false;
+        // _navMeshAgent.isStopped = false;
+        // _currentStoppingDistance = 0;
     }
 
     public void StopMovement()
     {
-        Debug.Log("Stopping Movement");
-        _navMeshAgent.isStopped = true;
-        _navMeshAgent.velocity = Vector3.zero;
-        _currentStoppingDistance = _finalStoppingDistance;
+        // Debug.Log("Stopping Movement");
+        // _navMeshAgent.isStopped = true;
+        // _navMeshAgent.velocity = Vector3.zero;
+        // _currentStoppingDistance = _finalStoppingDistance;
     }
 
 
@@ -151,7 +155,6 @@ public class EnemyMovementModule : MonoBehaviour
     {
         _pathing = true;
         Debug.Log("Beginning path calculation");
-        Debug.Log("Clearning Current Path");
         _navMeshAgent.ResetPath();
         StartCoroutine(CalculatePathHelper(_target.position));
     }
@@ -301,7 +304,7 @@ public class EnemyMovementModule : MonoBehaviour
         // This function will serve as a way to randomize navmesh agent settings so that each enemy can have a unique speed, acceleration, etc.
         _navMeshAgent.speed = Random.Range(_speedMin, _speedMax);
         _navMeshAgent.acceleration = Random.Range(_accelerationMin, _accelerationMax);
-        _navMeshAgent.angularSpeed = Random.Range(_angularSpeedMin, _angularSpeedMax);
+        // _navMeshAgent.angularSpeed = Random.Range(_angularSpeedMin, _angularSpeedMax);
         _navMeshAgent.stoppingDistance = Random.Range(_stoppingDistanceMin, _stoppingDistanceMax);
         _navMeshAgent.radius = Random.Range(_radiusMin, _radiusMax);
 

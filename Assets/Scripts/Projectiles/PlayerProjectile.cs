@@ -11,12 +11,13 @@ public class PlayerProjectile : MonoBehaviour
     public bool isSetup = false;
     public bool isPlayerProjectile = true;
 
-    public void SetupProjectile(Vector3 direction, float force, int damage, float range)
+    public void SetupProjectile(Vector3 direction, float force, int damage, float range, bool isPlayerProjectile)
     {
         this.damage = damage;
         this.range = range;
         this.direction = direction;
         this.force = force;
+        this.isPlayerProjectile = isPlayerProjectile;
 
         gameObject.GetComponent<Rigidbody>().linearVelocity = gameObject.transform.forward * force;
 
@@ -39,9 +40,9 @@ public class PlayerProjectile : MonoBehaviour
 
     public void ShouldDestroyItself()
     {
-        if (Mathf.Abs(transform.position.x) > ArcProjectileSystem.instance.range 
+        if (Mathf.Abs(transform.position.x) > ArcProjectileSystem.instance.projectileMaxRange 
             || 
-            Mathf.Abs(transform.position.z) > ArcProjectileSystem.instance.range)
+            Mathf.Abs(transform.position.z) > ArcProjectileSystem.instance.projectileMaxRange)
         {
             Destroy(gameObject);
         }
@@ -55,6 +56,13 @@ public class PlayerProjectile : MonoBehaviour
             if (collider.CompareTag("enemy-hitbox"))
             {
                 Debug.Log("Hit enemy");
+                
+                if (collider.transform.root.GetComponent<EnemyHealthModule>() != null)
+                {
+                    collider.transform.root.GetComponent<EnemyHealthModule>().TakeDamage(damage);
+                }
+
+                Destroy(gameObject);
             } 
         }
         else
@@ -62,6 +70,10 @@ public class PlayerProjectile : MonoBehaviour
             if (collider.CompareTag("player-hitbox"))
             {
                 Debug.Log("Hit player");
+
+                PlayerHealthManager.instance.TakeDamage(damage);
+
+                Destroy(gameObject);
             }
         }
     }

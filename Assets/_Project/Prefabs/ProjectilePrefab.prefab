@@ -127,7 +127,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   force: 0
   isSetup: 0
-  targetTag: enemy-visual
+  isPlayerProjectile: 0
 --- !u!54 &7195541154735486557
 Rigidbody:
   m_ObjectHideFlags: 0

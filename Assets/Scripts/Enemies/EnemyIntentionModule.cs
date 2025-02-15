@@ -22,7 +22,6 @@ public class EnemyIntentionModule : MonoBehaviour
     public int range;
     public float force;
     public int damage;
-    public bool isPlayerProjectile;
     public Transform source;
     public Transform target;
 
@@ -61,7 +60,7 @@ public class EnemyIntentionModule : MonoBehaviour
                     force,
                     range,
                     damage,
-                    isPlayerProjectile,
+                    false,
                     source,
                     target
                 )

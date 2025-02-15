@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class EnemyID: MonoBehaviour
+public class EnemyID: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public int id;
     public int _turnsAlive = 0;
@@ -8,6 +9,7 @@ public class EnemyID: MonoBehaviour
     [Header("Modules")]
     public EnemyIntentionModule intentionModule;
     public EnemyMovementModule movementModule;
+    public EnemyHealthModule healthModule;
 
     private void Start()
     {
@@ -17,5 +19,17 @@ public class EnemyID: MonoBehaviour
     public void IncrementTurnsAlive()
     {
         _turnsAlive++;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Pointer Enter");
+        healthModule.ShowUI();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("Pointer Exit");
+        healthModule.HideUI();
     }
 }

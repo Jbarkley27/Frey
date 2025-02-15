@@ -10,12 +10,7 @@ public class GlobalDataStore : MonoBehaviour
     public MovementSystem playerMovementSystem;
 
 
-    [Header("Parents")]
-    public Transform skillParent;
-
-
-    [Header("Managers")]
-    public GameObject manager;
+    public Material hitFlashMaterial_Base;
 
     
 
