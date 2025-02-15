@@ -10,12 +10,11 @@ using DG.Tweening;
 public class EnemyIntentionModule : MonoBehaviour
 {
     public Image nextMoveIcon;
-    public CanvasGroup nextMoveCanvasGroup;
     public Sprite moveIcon;
     public Sprite shootIcon;
-    public enum Intention { MOVE, SHOOT };
+    public Sprite canSeePlayerIcon;
+    public enum Intention { MOVE, SHOOT, SEEK };
     public Intention nextIntention;
-
     public GameObject projectilePrefab;
     public int projectileCount;
     public float spreadAngle;
@@ -24,32 +23,59 @@ public class EnemyIntentionModule : MonoBehaviour
     public int damage;
     public Transform source;
     public Transform target;
+    public bool isPlayerVisible = false;
+    public EnemyMovementModule enemyMovementModule;
 
 
 
     private void Start()
     {
-        
+        enemyMovementModule = GetComponent<EnemyMovementModule>();
     }
 
 
 
     private void Update() 
     {
-        
+        // Draw a ray so we can see it in the game view
+        Debug.DrawRay(transform.position, (GlobalDataStore.instance.player.position - transform.position), Color.white);
+
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, (GlobalDataStore.instance.player.position - transform.position), out hit, 1000f))
+        {
+            if (hit.collider.gameObject.CompareTag("player-hitbox"))
+            {
+               isPlayerVisible = true;
+            } 
+            else 
+            {
+                isPlayerVisible = false;
+            }
+        } 
+        else 
+        {
+            isPlayerVisible = false;
+        }
     }
+
+
+
+
+
 
 
     public void ActOnIntention()
     {
         Debug.Log("Acting on intention");
 
-        GetComponent<EnemyMovementModule>().StopCalculatingPath();
+        enemyMovementModule.StopCalculatingPath();
 
-        if (nextIntention == Intention.MOVE)
+        if (nextIntention == Intention.MOVE || nextIntention == Intention.SEEK)
         {
-            GetComponent<EnemyMovementModule>().ResumeMovement();
-        } else if (nextIntention == Intention.SHOOT)
+            enemyMovementModule.ResumeMovement();
+        }
+        else if (nextIntention == Intention.SHOOT)
         {
             Debug.Log("Shooting");
             ArcProjectileSystem.instance.SpawnProjectiles(
@@ -66,29 +92,43 @@ public class EnemyIntentionModule : MonoBehaviour
                 )
             );
         }
-        
-
     }
+
+
+
+
+
+
 
 
 
     public void CalculateNextIntention()
     {
         Debug.Log("Calculating next intention");
-        
-
-        if (GetComponent<EnemyMovementModule>().IsWithinRange())
+        if (enemyMovementModule.IsWithinRange())
         {
-            Debug.Log("Player is within range, I Should Shoot");
-            nextMoveIcon.sprite = shootIcon;
-            nextMoveIcon.transform.DOPunchScale(new Vector3(.8f, 0.2f, 0.1f), 0.5f);
-            nextIntention = Intention.SHOOT;
+            if (isPlayerVisible)
+            {
+                Debug.Log("Player is within range and visible, shooting");
+                enemyMovementModule.HideLineRenderer();
+                nextMoveIcon.sprite = shootIcon;
+                nextMoveIcon.transform.DOPunchScale(new Vector3(.8f, 0.2f, 0.1f), 0.5f);
+                nextIntention = Intention.SHOOT;
+                return;
+            } else {
+                Debug.Log("Player is within range but not visible");
+                nextMoveIcon.sprite = canSeePlayerIcon;
+                nextMoveIcon.transform.DOPunchScale(new Vector3(.8f, 0.2f, 0.1f), 0.5f);
+                nextIntention = Intention.SEEK;
+                enemyMovementModule.CalculatePathToPlayer(Intention.SEEK);
+                return;
+            }
         } else {
             Debug.Log("Player is not within range, I Should Move");
             nextMoveIcon.sprite = moveIcon;
             nextMoveIcon.transform.DOPunchScale(new Vector3(.8f, 0.2f, 0.1f), 0.5f);
             nextIntention = Intention.MOVE;
-            GetComponent<EnemyMovementModule>().CalculatePathToPlayer();
+            enemyMovementModule.CalculatePathToPlayer();
         }
     }
 

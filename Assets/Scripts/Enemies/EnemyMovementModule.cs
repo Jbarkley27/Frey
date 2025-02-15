@@ -8,13 +8,14 @@ using DG.Tweening;
 public class EnemyMovementModule : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent _navMeshAgent;
-    [SerializeField] private Transform _target;
+    [SerializeField] public Transform _target;
     [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private LineRenderer _finalLineRenderer;
     [SerializeField] private Transform _enemyVisual;
+    public NavMeshObstacle _navMeshObstacle;
     Coroutine _pathCoroutine;
     public bool _pathing = false;
-    public Rigidbody rb;
+    public Rigidbody _rb;
     public float _rotateSpeed = 5.0f;
 
 
@@ -37,6 +38,7 @@ public class EnemyMovementModule : MonoBehaviour
     [SerializeField] private List<Vector3> _newPoints = new List<Vector3>();
     [SerializeField] private float _spacing = 1f;
     [Range(20f, 100f)] public float _percentageOfPath = 50f;
+    [Range(20f, 100f)] public float _maxPercentageOfPath = 50f;
     List<Vector3> _tempPoints = new List<Vector3>();
     [SerializeField] private int _minPoints = 2;
 
@@ -44,7 +46,8 @@ public class EnemyMovementModule : MonoBehaviour
     {
         _navMeshAgent.autoRepath = false;
         RandomizeAgentValues();
-        _target = PlayerScentNodes.instance.GetRandomScentNode();
+        _target = PlayerScentNodes.instance.GetRandomScentNode().transform;
+        _rb = GetComponent<Rigidbody>();
     }
 
 
@@ -128,9 +131,8 @@ public class EnemyMovementModule : MonoBehaviour
 
     public void ResumeMovement()
     {
-        // _navMeshAgent.autoRepath = false;
-        // _navMeshAgent.isStopped = false;
-        // _currentStoppingDistance = 0;
+        transform.DOPath(_navMeshAgent.path.corners, Random.Range(.9f, 1.2f), PathType.CatmullRom, PathMode.Ignore)
+            .SetEase(Ease.InOutQuad);
     }
 
     public void StopMovement()
@@ -144,19 +146,15 @@ public class EnemyMovementModule : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
-    public void CalculatePathToPlayer()
+    public void HideLineRenderer()
     {
-        _pathing = true;
-        Debug.Log("Beginning path calculation");
-        _navMeshAgent.ResetPath();
-        StartCoroutine(CalculatePathHelper(_target.position));
+        _lineRenderer.positionCount = 0;
+        _finalLineRenderer.positionCount = 0;
+    }
+
+    public void ShowLineRenderer()
+    {
+        _lineRenderer.gameObject.SetActive(true);
     }
 
 
@@ -165,6 +163,30 @@ public class EnemyMovementModule : MonoBehaviour
 
 
 
+
+    public void CalculatePathToPlayer(EnemyIntentionModule.Intention intention = EnemyIntentionModule.Intention.MOVE)
+    {
+        _pathing = true;
+        Debug.Log("Beginning path calculation");
+        _navMeshAgent.ResetPath();
+        StartCoroutine(CalculatePathHelper(GetMovePosition(intention)));
+    }
+
+
+    public Vector3 GetMovePosition(EnemyIntentionModule.Intention intention)
+    {
+        // if (intention == EnemyIntentionModule.Intention.MOVE)
+        // {
+        //     return _target.position;
+        // }
+        // else if (intention == EnemyIntentionModule.Intention.SEEK)
+        // {
+        //     Vector2 rndPoint = Random.insideUnitSphere * 5;
+        //     return new Vector3(rndPoint.x, 0, rndPoint.y) + transform.position;
+        // }
+
+        return _target.position;
+    }
 
 
 
@@ -277,7 +299,7 @@ public class EnemyMovementModule : MonoBehaviour
 
         // Smoothly interpolate between current and target rotation
         Quaternion smoothedRotation = Quaternion.Slerp(
-            rb.rotation,             // Current rotation
+            _rb.rotation,             // Current rotation
             targetRotation,          // Target rotation
             _rotateSpeed * Time.deltaTime // Interpolation factor
         );
@@ -285,7 +307,7 @@ public class EnemyMovementModule : MonoBehaviour
         smoothedRotation = smoothedRotation.normalized;
 
         // Apply the smooth rotation to the Rigidbody
-        rb.MoveRotation(smoothedRotation);
+        _rb.MoveRotation(smoothedRotation);
     }
 
 
@@ -307,6 +329,8 @@ public class EnemyMovementModule : MonoBehaviour
         // _navMeshAgent.angularSpeed = Random.Range(_angularSpeedMin, _angularSpeedMax);
         _navMeshAgent.stoppingDistance = Random.Range(_stoppingDistanceMin, _stoppingDistanceMax);
         _navMeshAgent.radius = Random.Range(_radiusMin, _radiusMax);
+        _rotateSpeed = Random.Range(_rotateSpeed - 1f, _rotateSpeed + 1f);
+        _percentageOfPath = Random.Range(_percentageOfPath, _maxPercentageOfPath);
 
         _finalStoppingDistance = _navMeshAgent.stoppingDistance;
     }

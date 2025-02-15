@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerScentNodes : MonoBehaviour
 {
-    public List<GameObject> _scentNodes = new List<GameObject>();
+    public List<ScentNode> _scentNodes = new List<ScentNode>();
     public static PlayerScentNodes instance;
     public Transform _player;
 
@@ -23,10 +23,11 @@ public class PlayerScentNodes : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        foreach (Transform child in transform)
-        {
-            _scentNodes.Add(child.gameObject);
-        }
+        // foreach (Transform child in transform)
+        // {
+        //     _scentNodes.Add(child.gameObject.GetComponent<ScentNode>());
+        //     child.gameObject.GetComponent<ScentNode>().EnemyHasScent = false;
+        // }
     }
 
     // Update is called once per frame
@@ -36,8 +37,20 @@ public class PlayerScentNodes : MonoBehaviour
     }
 
 
-    public Transform GetRandomScentNode()
+    public ScentNode GetRandomScentNode()
     {
-        return _scentNodes[Random.Range(0, _scentNodes.Count)].transform;
+        ScentNode newNode = _scentNodes[Random.Range(0, _scentNodes.Count)];
+
+        foreach (ScentNode node in _scentNodes)
+        {
+            if (!node.EnemyHasScent)
+            {
+                node.EnemyHasScent = true;
+                return node;
+            }
+        }
+
+        newNode.EnemyHasScent = true;
+        return newNode;
     }
 }

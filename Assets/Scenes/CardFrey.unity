@@ -1447,6 +1447,7 @@ GameObject:
   - component: {fileID: 72611574}
   - component: {fileID: 72611573}
   - component: {fileID: 72611575}
+  - component: {fileID: 72611576}
   m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Untagged
@@ -1463,7 +1464,7 @@ Transform:
   m_GameObject: {fileID: 72611570}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalPosition: {x: -7.77, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1538,6 +1539,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0
+--- !u!114 &72611576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72611570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cf99c7bf8614219a27ff2184cb9b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHasScent: 0
 --- !u!1 &77770815
 GameObject:
   m_ObjectHideFlags: 0
@@ -10363,6 +10377,7 @@ GameObject:
   - component: {fileID: 634329953}
   - component: {fileID: 634329952}
   - component: {fileID: 634329954}
+  - component: {fileID: 634329955}
   m_Layer: 0
   m_Name: Sphere (2)
   m_TagString: Untagged
@@ -10379,7 +10394,7 @@ Transform:
   m_GameObject: {fileID: 634329949}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 7.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10454,6 +10469,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0
+--- !u!114 &634329955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634329949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cf99c7bf8614219a27ff2184cb9b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHasScent: 0
 --- !u!1 &641569006
 GameObject:
   m_ObjectHideFlags: 0
@@ -11200,6 +11228,7 @@ GameObject:
   - component: {fileID: 668101320}
   - component: {fileID: 668101319}
   - component: {fileID: 668101321}
+  - component: {fileID: 668101322}
   m_Layer: 0
   m_Name: Sphere (4)
   m_TagString: Untagged
@@ -11291,6 +11320,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0
+--- !u!114 &668101322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668101316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cf99c7bf8614219a27ff2184cb9b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHasScent: 0
 --- !u!1 &675064921
 GameObject:
   m_ObjectHideFlags: 0
@@ -13799,6 +13841,7 @@ GameObject:
   - component: {fileID: 820193530}
   - component: {fileID: 820193529}
   - component: {fileID: 820193531}
+  - component: {fileID: 820193532}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -13815,7 +13858,7 @@ Transform:
   m_GameObject: {fileID: 820193526}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: 7.41, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13890,6 +13933,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0
+--- !u!114 &820193532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820193526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cf99c7bf8614219a27ff2184cb9b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHasScent: 0
 --- !u!1 &827077230
 GameObject:
   m_ObjectHideFlags: 0
@@ -15083,7 +15139,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 46315494573f1455c98d867cc7dfd41b, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15127,8 +15183,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.78431374}
-      key1: {r: 1, g: 1, b: 1, a: 0.78431374}
+      key0: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -15144,7 +15200,7 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
+      atime1: 65322
       atime2: 0
       atime3: 0
       atime4: 0
@@ -15205,16 +15261,16 @@ NavMeshAgent:
   m_Radius: 2.72
   m_Speed: 20
   m_Acceleration: 30
-  avoidancePriority: 50
+  avoidancePriority: 40
   m_AngularSpeed: 0
   m_StoppingDistance: 20
   m_AutoTraverseOffMeshLink: 0
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 0
   m_Height: 0.00001
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 3
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &874203368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15249,9 +15305,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMoveIcon: {fileID: 1854239879}
-  nextMoveCanvasGroup: {fileID: 3632625}
   moveIcon: {fileID: 21300000, guid: 10cd44ceb1c4249379f70a656fb47670, type: 3}
   shootIcon: {fileID: 21300000, guid: f7c555f258afc4c678005b9fe18e9224, type: 3}
+  canSeePlayerIcon: {fileID: 21300000, guid: 856b21dd5b43f4dbdbf1cfbca289c734, type: 3}
   nextIntention: 0
   projectilePrefab: {fileID: 5862938604812430877, guid: 25b460513c7b84dd29f467382527708b, type: 3}
   projectileCount: 1
@@ -15261,6 +15317,8 @@ MonoBehaviour:
   damage: 2
   source: {fileID: 540216115}
   target: {fileID: 1242362095}
+  isPlayerVisible: 0
+  enemyMovementModule: {fileID: 0}
 --- !u!114 &874203370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15274,26 +15332,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _navMeshAgent: {fileID: 874203367}
-  _target: {fileID: 1242362095}
+  _target: {fileID: 1595921491}
   _lineRenderer: {fileID: 874203365}
   _finalLineRenderer: {fileID: 1087611342}
   _enemyVisual: {fileID: 540216115}
+  _navMeshObstacle: {fileID: 0}
   _pathing: 0
-  rb: {fileID: 874203366}
-  _rotateSpeed: 7
+  _rb: {fileID: 874203366}
+  _rotateSpeed: 4
   _speedMin: 200
   _speedMax: 230
   _accelerationMin: 40
   _accelerationMax: 55
-  _stoppingDistanceMin: 30
-  _stoppingDistanceMax: 45
+  _stoppingDistanceMin: 25
+  _stoppingDistanceMax: 35
   _currentStoppingDistance: 0.5
   _finalStoppingDistance: 0.5
   _radiusMin: 0.1
-  _radiusMax: 0.5
+  _radiusMax: 0.3
   _newPoints: []
   _spacing: 1
-  _percentageOfPath: 50
+  _percentageOfPath: 25
+  _maxPercentageOfPath: 45
   _minPoints: 3
 --- !u!114 &874203371
 MonoBehaviour:
@@ -20209,7 +20269,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 46315494573f1455c98d867cc7dfd41b, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20253,8 +20313,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.78431374}
-      key1: {r: 1, g: 1, b: 1, a: 0.78431374}
+      key0: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -20270,7 +20330,7 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
+      atime1: 65322
       atime2: 0
       atime3: 0
       atime4: 0
@@ -20335,12 +20395,12 @@ NavMeshAgent:
   m_AngularSpeed: 0
   m_StoppingDistance: 20
   m_AutoTraverseOffMeshLink: 0
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 0
   m_Height: 0.00001
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 3
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &1179465785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20375,9 +20435,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMoveIcon: {fileID: 1980530896}
-  nextMoveCanvasGroup: {fileID: 1504682654}
   moveIcon: {fileID: 21300000, guid: 10cd44ceb1c4249379f70a656fb47670, type: 3}
   shootIcon: {fileID: 21300000, guid: f7c555f258afc4c678005b9fe18e9224, type: 3}
+  canSeePlayerIcon: {fileID: 21300000, guid: 856b21dd5b43f4dbdbf1cfbca289c734, type: 3}
   nextIntention: 0
   projectilePrefab: {fileID: 5862938604812430877, guid: 25b460513c7b84dd29f467382527708b, type: 3}
   projectileCount: 1
@@ -20387,6 +20447,8 @@ MonoBehaviour:
   damage: 2
   source: {fileID: 210827419}
   target: {fileID: 1242362095}
+  isPlayerVisible: 0
+  enemyMovementModule: {fileID: 0}
 --- !u!114 &1179465787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20400,26 +20462,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _navMeshAgent: {fileID: 1179465784}
-  _target: {fileID: 1242362095}
+  _target: {fileID: 2072132514}
   _lineRenderer: {fileID: 1179465782}
   _finalLineRenderer: {fileID: 1806983674}
   _enemyVisual: {fileID: 210827419}
+  _navMeshObstacle: {fileID: 0}
   _pathing: 0
-  rb: {fileID: 1179465783}
-  _rotateSpeed: 7
+  _rb: {fileID: 1179465783}
+  _rotateSpeed: 4
   _speedMin: 200
   _speedMax: 230
   _accelerationMin: 40
   _accelerationMax: 55
-  _stoppingDistanceMin: 30
-  _stoppingDistanceMax: 45
+  _stoppingDistanceMin: 25
+  _stoppingDistanceMax: 35
   _currentStoppingDistance: 0.5
   _finalStoppingDistance: 0.5
   _radiusMin: 0.1
-  _radiusMax: 0.5
+  _radiusMax: 0.3
   _newPoints: []
   _spacing: 1
-  _percentageOfPath: 50
+  _percentageOfPath: 25
+  _maxPercentageOfPath: 45
   _minPoints: 3
 --- !u!114 &1179465788
 MonoBehaviour:
@@ -21218,7 +21282,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6427d0fdd8a4270a15c20be9f3efb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scentNodes: []
+  _scentNodes:
+  - {fileID: 820193532}
+  - {fileID: 72611576}
+  - {fileID: 634329955}
+  - {fileID: 1333427750}
+  - {fileID: 668101322}
+  - {fileID: 1595921496}
+  - {fileID: 2072132519}
+  - {fileID: 2109911140}
   _player: {fileID: 1242362095}
 --- !u!4 &1232484455
 Transform:
@@ -23024,6 +23096,7 @@ GameObject:
   - component: {fileID: 1333427748}
   - component: {fileID: 1333427747}
   - component: {fileID: 1333427749}
+  - component: {fileID: 1333427750}
   m_Layer: 0
   m_Name: Sphere (3)
   m_TagString: Untagged
@@ -23040,7 +23113,7 @@ Transform:
   m_GameObject: {fileID: 1333427744}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: -7.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23115,6 +23188,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0
+--- !u!114 &1333427750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333427744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cf99c7bf8614219a27ff2184cb9b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHasScent: 0
 --- !u!1 &1338121785
 GameObject:
   m_ObjectHideFlags: 0
@@ -26970,6 +27056,7 @@ GameObject:
   - component: {fileID: 1595921494}
   - component: {fileID: 1595921493}
   - component: {fileID: 1595921495}
+  - component: {fileID: 1595921496}
   m_Layer: 0
   m_Name: Sphere (5)
   m_TagString: Untagged
@@ -27061,6 +27148,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0
+--- !u!114 &1595921496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595921490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cf99c7bf8614219a27ff2184cb9b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHasScent: 0
 --- !u!1 &1599779402
 GameObject:
   m_ObjectHideFlags: 0
@@ -29997,7 +30097,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 46315494573f1455c98d867cc7dfd41b, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30041,8 +30141,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.78431374}
-      key1: {r: 1, g: 1, b: 1, a: 0.78431374}
+      key0: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -30058,7 +30158,7 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
+      atime1: 65322
       atime2: 0
       atime3: 0
       atime4: 0
@@ -30110,26 +30210,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _navMeshAgent: {fileID: 1800517363}
-  _target: {fileID: 1242362095}
+  _target: {fileID: 634329950}
   _lineRenderer: {fileID: 1800517359}
   _finalLineRenderer: {fileID: 1898373558}
   _enemyVisual: {fileID: 464049151}
+  _navMeshObstacle: {fileID: 0}
   _pathing: 0
-  rb: {fileID: 1800517362}
-  _rotateSpeed: 7
-  _speedMin: 200
-  _speedMax: 230
-  _accelerationMin: 40
-  _accelerationMax: 55
-  _stoppingDistanceMin: 30
-  _stoppingDistanceMax: 45
+  _rb: {fileID: 1800517362}
+  _rotateSpeed: 4
+  _speedMin: 0
+  _speedMax: 0
+  _accelerationMin: 0
+  _accelerationMax: 0
+  _stoppingDistanceMin: 25
+  _stoppingDistanceMax: 35
   _currentStoppingDistance: 0.5
   _finalStoppingDistance: 0.5
   _radiusMin: 0.1
-  _radiusMax: 0.5
+  _radiusMax: 0.3
   _newPoints: []
   _spacing: 1
-  _percentageOfPath: 50
+  _percentageOfPath: 25
+  _maxPercentageOfPath: 45
   _minPoints: 3
 --- !u!54 &1800517362
 Rigidbody:
@@ -30170,16 +30272,16 @@ NavMeshAgent:
   m_Radius: 2.72
   m_Speed: 20
   m_Acceleration: 30
-  avoidancePriority: 50
+  avoidancePriority: 30
   m_AngularSpeed: 0
   m_StoppingDistance: 20
   m_AutoTraverseOffMeshLink: 0
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 0
   m_Height: 0.00001
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 3
+  m_ObstacleAvoidanceType: 4
 --- !u!135 &1800517364
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -30214,9 +30316,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMoveIcon: {fileID: 1126472217}
-  nextMoveCanvasGroup: {fileID: 1762163026}
   moveIcon: {fileID: 21300000, guid: 10cd44ceb1c4249379f70a656fb47670, type: 3}
   shootIcon: {fileID: 21300000, guid: f7c555f258afc4c678005b9fe18e9224, type: 3}
+  canSeePlayerIcon: {fileID: 21300000, guid: 856b21dd5b43f4dbdbf1cfbca289c734, type: 3}
   nextIntention: 0
   projectilePrefab: {fileID: 5862938604812430877, guid: 25b460513c7b84dd29f467382527708b, type: 3}
   projectileCount: 1
@@ -30226,6 +30328,8 @@ MonoBehaviour:
   damage: 2
   source: {fileID: 464049151}
   target: {fileID: 1242362095}
+  isPlayerVisible: 0
+  enemyMovementModule: {fileID: 0}
 --- !u!114 &1800517366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36106,6 +36210,7 @@ GameObject:
   - component: {fileID: 2072132517}
   - component: {fileID: 2072132516}
   - component: {fileID: 2072132518}
+  - component: {fileID: 2072132519}
   m_Layer: 0
   m_Name: Sphere (6)
   m_TagString: Untagged
@@ -36197,6 +36302,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0
+--- !u!114 &2072132519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072132513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cf99c7bf8614219a27ff2184cb9b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHasScent: 0
 --- !u!1 &2074234082
 GameObject:
   m_ObjectHideFlags: 0
@@ -36721,6 +36839,7 @@ GameObject:
   - component: {fileID: 2109911138}
   - component: {fileID: 2109911137}
   - component: {fileID: 2109911139}
+  - component: {fileID: 2109911140}
   m_Layer: 0
   m_Name: Sphere (7)
   m_TagString: Untagged
@@ -36812,6 +36931,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0
+--- !u!114 &2109911140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109911134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cf99c7bf8614219a27ff2184cb9b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHasScent: 0
 --- !u!1 &2114559604
 GameObject:
   m_ObjectHideFlags: 0
