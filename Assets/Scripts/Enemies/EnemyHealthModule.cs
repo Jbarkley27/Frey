@@ -7,10 +7,7 @@ public class EnemyHealthModule : MonoBehaviour
     public int currentHealth = 100;
     public int maxHealth = 100;
     public TMP_Text healthText;
-
-
     public int currentBlock = 0;
-    public int maxBlock = 100;
     public TMP_Text blockText;
     public GameObject statusEffectPanel;
     public GameObject healthPanel;

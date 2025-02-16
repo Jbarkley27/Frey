@@ -13,7 +13,7 @@ public class EnemyIntentionModule : MonoBehaviour
     public Sprite moveIcon;
     public Sprite shootIcon;
     public Sprite canSeePlayerIcon;
-    public enum Intention { MOVE, SHOOT, SEEK };
+    public enum Intention { MOVE, ATTACK, SEEK };
     public Intention nextIntention;
     public GameObject projectilePrefab;
     public int projectileCount;
@@ -75,9 +75,9 @@ public class EnemyIntentionModule : MonoBehaviour
         {
             enemyMovementModule.ResumeMovement();
         }
-        else if (nextIntention == Intention.SHOOT)
+        else if (nextIntention == Intention.ATTACK)
         {
-            Debug.Log("Shooting");
+            Debug.Log("ATTACKING");
             ArcProjectileSystem.instance.SpawnProjectiles(
                 new ArcProjectileSystem.ProjectileData(
                     projectilePrefab,
@@ -109,14 +109,12 @@ public class EnemyIntentionModule : MonoBehaviour
         {
             if (isPlayerVisible)
             {
-                Debug.Log("Player is within range and visible, shooting");
                 enemyMovementModule.HideLineRenderer();
                 nextMoveIcon.sprite = shootIcon;
                 nextMoveIcon.transform.DOPunchScale(new Vector3(.8f, 0.2f, 0.1f), 0.5f);
-                nextIntention = Intention.SHOOT;
+                nextIntention = Intention.ATTACK;
                 return;
             } else {
-                Debug.Log("Player is within range but not visible");
                 nextMoveIcon.sprite = canSeePlayerIcon;
                 nextMoveIcon.transform.DOPunchScale(new Vector3(.8f, 0.2f, 0.1f), 0.5f);
                 nextIntention = Intention.SEEK;
@@ -124,7 +122,6 @@ public class EnemyIntentionModule : MonoBehaviour
                 return;
             }
         } else {
-            Debug.Log("Player is not within range, I Should Move");
             nextMoveIcon.sprite = moveIcon;
             nextMoveIcon.transform.DOPunchScale(new Vector3(.8f, 0.2f, 0.1f), 0.5f);
             nextIntention = Intention.MOVE;

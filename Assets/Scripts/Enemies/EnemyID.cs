@@ -23,13 +23,11 @@ public class EnemyID: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Pointer Enter");
         healthModule.ShowUI();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Pointer Exit");
         healthModule.HideUI();
     }
 }

@@ -43,7 +43,6 @@ public class Chip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     }
 
     public void SetSelectionState(SelectionState state) {
-
         switch (state) {
             case SelectionState.None:
                 selectedBorderCG.alpha = 0;

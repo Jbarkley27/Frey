@@ -20,15 +20,6 @@ public class PlayerScentNodes : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        // foreach (Transform child in transform)
-        // {
-        //     _scentNodes.Add(child.gameObject.GetComponent<ScentNode>());
-        //     child.gameObject.GetComponent<ScentNode>().EnemyHasScent = false;
-        // }
-    }
 
     // Update is called once per frame
     void Update()

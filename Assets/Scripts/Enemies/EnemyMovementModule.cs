@@ -12,7 +12,6 @@ public class EnemyMovementModule : MonoBehaviour
     [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private LineRenderer _finalLineRenderer;
     [SerializeField] private Transform _enemyVisual;
-    public NavMeshObstacle _navMeshObstacle;
     Coroutine _pathCoroutine;
     public bool _pathing = false;
     public Rigidbody _rb;
@@ -20,16 +19,9 @@ public class EnemyMovementModule : MonoBehaviour
 
 
     [Header("NavMesh Agent Settings")]
-    [SerializeField] private float _speedMin = 1.0f;
-    [SerializeField] private float _speedMax = 2.0f;
-    [SerializeField] private float _accelerationMin = 1.0f;
-    [SerializeField] private float _accelerationMax = 2.0f;
-    // [SerializeField] private float _angularSpeedMin = 120.0f;
-    // [SerializeField] private float _angularSpeedMax = 240.0f;
-    [SerializeField] private float _stoppingDistanceMin = 1.0f;
-    [SerializeField] private float _stoppingDistanceMax = 2.0f;
-    [SerializeField] private float _currentStoppingDistance = 0.5f;
-    [SerializeField] private float _finalStoppingDistance = 0.5f;
+    [SerializeField] private float _sightRangeMin = 1.0f;
+    [SerializeField] private float _sightRangeMax = 2.0f;
+    [SerializeField] private float _sightRange = 1.0f;
     [SerializeField] private float _radiusMin = 0.5f;
     [SerializeField] private float _radiusMax = 1.0f;
 
@@ -57,8 +49,6 @@ public class EnemyMovementModule : MonoBehaviour
         // ensure enemy y position is always 0
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 
-        _navMeshAgent.stoppingDistance = _currentStoppingDistance;
-
         _navMeshAgent.velocity = Vector3.zero;
         _navMeshAgent.isStopped = true;
 
@@ -83,9 +73,7 @@ public class EnemyMovementModule : MonoBehaviour
 
     public IEnumerator CalculatePathHelper(Vector3 targetPos, bool isFinalPath = false)
     {
-        StopMovement();
         _navMeshAgent.SetDestination(targetPos);
-        StopMovement();
 
         // Keep trying until the agent successfully calculates a path
         while (!_navMeshAgent.hasPath)
@@ -104,7 +92,6 @@ public class EnemyMovementModule : MonoBehaviour
         {
             // This is when we have already limited the path
             Debug.Log("Final Path Calculated -- Not limiting path");
-
             _finalLineRenderer.positionCount = _navMeshAgent.path.corners.Length;
             _finalLineRenderer.SetPosition(0, _enemyVisual.position);
             _finalLineRenderer.SetPositions(_navMeshAgent.path.corners);
@@ -137,10 +124,7 @@ public class EnemyMovementModule : MonoBehaviour
 
     public void StopMovement()
     {
-        // Debug.Log("Stopping Movement");
-        // _navMeshAgent.isStopped = true;
-        // _navMeshAgent.velocity = Vector3.zero;
-        // _currentStoppingDistance = _finalStoppingDistance;
+
     }
 
 
@@ -169,24 +153,9 @@ public class EnemyMovementModule : MonoBehaviour
         _pathing = true;
         Debug.Log("Beginning path calculation");
         _navMeshAgent.ResetPath();
-        StartCoroutine(CalculatePathHelper(GetMovePosition(intention)));
+        StartCoroutine(CalculatePathHelper(_target.position));
     }
 
-
-    public Vector3 GetMovePosition(EnemyIntentionModule.Intention intention)
-    {
-        // if (intention == EnemyIntentionModule.Intention.MOVE)
-        // {
-        //     return _target.position;
-        // }
-        // else if (intention == EnemyIntentionModule.Intention.SEEK)
-        // {
-        //     Vector2 rndPoint = Random.insideUnitSphere * 5;
-        //     return new Vector3(rndPoint.x, 0, rndPoint.y) + transform.position;
-        // }
-
-        return _target.position;
-    }
 
 
 
@@ -286,8 +255,6 @@ public class EnemyMovementModule : MonoBehaviour
 
     public void RotateTowards(Vector3 targetDirection)
     {
-        // if (TurnBasedBattleManager.instance.IsTimeStopped()) return;
-
         // Calculate the target rotation
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
 
@@ -318,20 +285,15 @@ public class EnemyMovementModule : MonoBehaviour
 
     public bool IsWithinRange()
     {
-        return Vector3.Distance(transform.position, _target.position) < _finalStoppingDistance;
+        return Vector3.Distance(transform.position, _target.position) < _sightRange;
     }
 
     public void RandomizeAgentValues()
     {
         // This function will serve as a way to randomize navmesh agent settings so that each enemy can have a unique speed, acceleration, etc.
-        _navMeshAgent.speed = Random.Range(_speedMin, _speedMax);
-        _navMeshAgent.acceleration = Random.Range(_accelerationMin, _accelerationMax);
-        // _navMeshAgent.angularSpeed = Random.Range(_angularSpeedMin, _angularSpeedMax);
-        _navMeshAgent.stoppingDistance = Random.Range(_stoppingDistanceMin, _stoppingDistanceMax);
         _navMeshAgent.radius = Random.Range(_radiusMin, _radiusMax);
         _rotateSpeed = Random.Range(_rotateSpeed - 1f, _rotateSpeed + 1f);
         _percentageOfPath = Random.Range(_percentageOfPath, _maxPercentageOfPath);
-
-        _finalStoppingDistance = _navMeshAgent.stoppingDistance;
+        _sightRange = Random.Range(_sightRangeMin, _sightRangeMax);
     }
 }

@@ -1,4 +1,3 @@
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 using Image = UnityEngine.UI.Image;
@@ -8,7 +7,6 @@ public class WorldCursorManager : MonoBehaviour
 {
     [SerializeField] private GameObject _lineEndObject;
     [SerializeField] private LayerMask _touchLayer;
-    [SerializeField] public MovementSystem _movementSystem;
     [SerializeField] public LineRenderer _lineRenderer;
     public static WorldCursorManager instance;
     public Chip activeChip;
@@ -16,7 +14,6 @@ public class WorldCursorManager : MonoBehaviour
     public CursorState cursorState = CursorState.No_Chip_Loaded;
     public GameObject cursorAimRoot;
     public Image cursorAimImage;
-    public LayerMask enemyLayer;
 
     private void Awake()
     {
@@ -171,27 +168,6 @@ public class WorldCursorManager : MonoBehaviour
         }
     }
 
-
-
-
-
-    // ENEMY DETECTION
-    // public bool IsMouseOverEnemy()
-    // {
-    //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    //     RaycastHit hit;
-    //     if (Physics.Raycast(ray, out hit, Mathf.Infinity, enemyLayer))
-    //     {
-    //         if (hit.collider.gameObject.tag == "enemy-visual")
-    //         {
-    //             // Debug.Log("Mouse is over enemy");
-    //             hit.collider.transform.parent.GetComponent<EnemyHealthModule>().ShowUI();
-    //             return true;
-    //         }
-    //     }
-        
-    //     return false;
-    // }
 
 
 
